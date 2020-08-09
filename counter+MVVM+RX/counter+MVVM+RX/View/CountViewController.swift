@@ -11,46 +11,46 @@ import RxSwift
 import RxCocoa
 
 class CountViewController: UIViewController {
-    
-    private let viewModel = CounterViewModel()
-    private var disposeBag = DisposeBag()
-    
-    @IBOutlet weak var countLabel: UILabel!
-    @IBOutlet weak var decreaseButton: UIButton!
-    @IBOutlet weak var increaseButton: UIButton!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        bindUI()
-    }
-    
-    func bindUI() {
-        viewModel.number
-            .map { "\($0)" }
-            .bind(to: countLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        viewModel.number
-            .map { $0 >= 10 ? false : true }
-            .bind(to: increaseButton.rx.isEnabled)
-            .disposed(by: disposeBag)
-        
-        viewModel.number
-            .map { $0 <= 0 ? false : true }
-            .bind(to: decreaseButton.rx.isEnabled)
-            .disposed(by: disposeBag)
-    }
-
-    @IBAction func decreaseButtonPressed(_ sender: Any) {
-        viewModel.changeCount(-1)
-    }
-    
-    @IBAction func increaseButtonPressed(_ sender: Any) {
-        viewModel.changeCount(1)
-    }
-    
-    @IBAction func resetButtonPressed(_ sender: Any) {
-        viewModel.resetCount()
-    }
+     
+     private let viewModel = CounterViewModel()
+     private var disposeBag = DisposeBag()
+     
+     @IBOutlet weak var countLabel: UILabel!
+     @IBOutlet weak var decreaseButton: UIButton!
+     @IBOutlet weak var increaseButton: UIButton!
+     
+     override func viewDidLoad() {
+          super.viewDidLoad()
+          bindUI()
+     }
+     
+     func bindUI() {
+          viewModel.number
+               .map { "\($0)" }
+               .bind(to: countLabel.rx.text)
+               .disposed(by: disposeBag)
+          
+          viewModel.number
+               .map { $0 >= 10 ? false : true }
+               .bind(to: increaseButton.rx.isEnabled)
+               .disposed(by: disposeBag)
+          
+          viewModel.number
+               .map { $0 <= 0 ? false : true }
+               .bind(to: decreaseButton.rx.isEnabled)
+               .disposed(by: disposeBag)
+     }
+     
+     @IBAction func decreaseButtonPressed(_ sender: Any) {
+          viewModel.changeCount(-1)
+     }
+     
+     @IBAction func increaseButtonPressed(_ sender: Any) {
+          viewModel.changeCount(1)
+     }
+     
+     @IBAction func resetButtonPressed(_ sender: Any) {
+          viewModel.resetCount()
+     }
 }
 
